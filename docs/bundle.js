@@ -57,7 +57,7 @@
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
+/******/ 	__webpack_require__.p = "/word_watch/";
 /******/
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(__webpack_require__.s = 0);
@@ -82,8 +82,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 __WEBPACK_IMPORTED_MODULE_0_jquery___default()(document).ready(() => {
-  // have fun!
-})
+  // fetch API for the top word
+  // update value of id with return of fetch
+  __WEBPACK_IMPORTED_MODULE_0_jquery___default.a.get("https://wordwatch-api.herokuapp.com/api/v1/top_word", function(data, status){
+      let topWord = Object.keys(data.word)[0]
+      let topWordCount = data.word[topWord]
+
+      __WEBPACK_IMPORTED_MODULE_0_jquery___default()("#fetch-top-word").text(topWord + ": " + topWordCount);
+    });
+
+  // Add event listener to button
+  document.getElementById("add-word").addEventListener("click", addWord);
+});
+
+function addWord() {
+  // Find word from text input
+  let word = __WEBPACK_IMPORTED_MODULE_0_jquery___default()("#new-word").val()
+
+  // POST #new-text to API
+  let body = { "word": { "value": word } }
+
+  __WEBPACK_IMPORTED_MODULE_0_jquery___default.a.post("https://wordwatch-api.herokuapp.com/api/v1/words", body, function(data, status){
+    alert(data.message)
+  })
+}
 
 
 /***/ }),

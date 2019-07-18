@@ -4,7 +4,8 @@ module.exports = {
   entry: ['./src/index.js', './src/stylesheets/styles.scss'],
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'docs')
+    path: path.resolve(__dirname, 'docs'),
+    publicPath: "/word_watch/"
   },
   module: {
     loaders: [{
