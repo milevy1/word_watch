@@ -13,4 +13,19 @@ $(document).ready(() => {
 
       $("#fetch-top-word").text(topWord + ": " + topWordCount);
     });
+
+  // Add event listener to button
+  document.getElementById("add-word").addEventListener("click", addWord);
 });
+
+function addWord() {
+  // Find word from text input
+  let word = $("#new-word").val()
+
+  // POST #new-text to API
+  let body = { "word": { "value": word } }
+
+  $.post("https://wordwatch-api.herokuapp.com/api/v1/words", body, function(data, status){
+    alert(data.message)
+  })
+}
